@@ -1,7 +1,7 @@
 from api import app
-from api.user_api import user_api
+from api.user_list_api import user_list_api
 
-app.register_blueprint(user_api)
+app.register_blueprint(user_list_api)
 
 
 if __name__ == '__main__':

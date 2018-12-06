@@ -4,12 +4,12 @@ from logging.handlers import RotatingFileHandler
 from flask import Flask
 
 
-class AnimeUserListServiceFlask(Flask):
+class AnimeUserServiceFlask(Flask):
     pass
 
 
 def create_app(config_class):
-    app = AnimeUserListServiceFlask(__name__, static_url_path='')
+    app = AnimeUserServiceFlask(__name__, static_url_path='')
 
     # Configuration
     app.config.from_object(f'config.{config_class}')
