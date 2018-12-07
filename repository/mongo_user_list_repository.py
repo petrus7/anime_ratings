@@ -1,14 +1,26 @@
 from repository.repository_interface import RepositoryInterface
 
 
-class MongoDBUserRepository(RepositoryInterface):
+class MongoDBUserListRepository(RepositoryInterface):
+
+
 
     def __init__(self, db):
-        super(MongoDBUserRepository, self).__init__(db)
-        self.users = self._db.db().users
+        super(MongoDBUserListRepository, self).__init__(db)
+        self.lists = self._db.db().lists
 
-    def get_user(self, user_name):
-        return self.users.find_one({'username': user_name})
+    def get_all_users_watched_anime(self, anime_id):
+        pipeline = [
+            {
+                '$match': {'anime_id':anime_id}
+            },
+            {
+                '$group': {
+                    '_id': '$my_score',
+                    'count': {'$sum': 1},
+                    'users': {'$push': {'username':'$username','anime_id':'$anime_id','score':'$my_score'}}
+                }
+            },
 
-    def get_users(self, user_names):
-        return self.users.find({'username': {'$in': user_names}})
+        ]
+        return self.lists.aggregate(pipeline)

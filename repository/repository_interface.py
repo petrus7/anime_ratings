@@ -7,9 +7,7 @@ class RepositoryInterface(abc.ABC):
         self._db = db
 
     @abc.abstractmethod
-    def get_user(self, user_name):
+    def get_all_users_watched_anime(self, anime_id):
         pass
 
-    @abc.abstractmethod
-    def get_users(self, user_names):
-        pass
+
