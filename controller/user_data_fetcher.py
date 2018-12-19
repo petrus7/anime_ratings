@@ -12,3 +12,10 @@ class RestUserDataFetcher:
         um = UserListStorage()
         um.get_most_extreme_users(users_group, positive)
         return um.to_dict()
+
+
+    def get_user_animes(self, users):
+        u_list = self.r.get_user_animes(users)
+        um = UserListStorage()
+        um.get_user_list(u_list)
+        return um.to_dict()

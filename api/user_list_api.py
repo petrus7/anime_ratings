@@ -29,6 +29,15 @@ class GetUser(Resource):
         return c.get_extremum_users(int(anime_id), extreme_marker)
 
 
+class GetUserList(Resource):
+
+    def get(self):
+        username = request.args.get('username', None)
+        if username is None or username == '':
+            raise BadParamsException('Not username provided')
+        c = ControllerFactory.build_rest_mongo_controller()
+        return c.get_user_animes(username)
+
 @user_list_api.errorhandler(BadParamsException)
 def handle_invalid_usage(error):
     response = jsonify(error.to_dict())
@@ -37,3 +46,4 @@ def handle_invalid_usage(error):
 
 
 api.add_resource(GetUser, '/get_users_extremum_users')
+api.add_resource(GetUserList, '/get_user_anime_ids')

@@ -28,5 +28,8 @@ class UserListStorage:
         else:
             self.u_data = [UserList(u) for u in user_groups[0].get('users')]
 
+    def get_user_list(self, user_list_obj):
+        self.u_data = [UserList(u) for u in user_list_obj]
+
     def to_dict(self):
         return [u.to_dict() for u in self.u_data]

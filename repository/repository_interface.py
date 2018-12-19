@@ -10,4 +10,6 @@ class RepositoryInterface(abc.ABC):
     def get_all_users_watched_anime(self, anime_id):
         pass
 
-
+    @abc.abstractmethod
+    def get_user_animes(self, usernaem):
+        pass
